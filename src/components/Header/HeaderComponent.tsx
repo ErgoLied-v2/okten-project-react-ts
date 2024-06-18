@@ -1,17 +1,22 @@
+import {NavLink} from "react-router-dom";
+
 const HeaderComponent = () => {
     return (
         <header>
-            [toggler]
+            <div> [toggler]</div>
 
-            [all movies]
+            <NavLink to={'/'}>[all movies]</NavLink>
 
-            [genres list]
+            <NavLink to={'genres'}>[genres list]</NavLink>
 
-            [search movies]
+            <div> [search movies component]</div>
 
-            [user accaunt info
-                * [favourite movies list] (ADDITIONAL)
-            ]
+            <div> [user accaunt info
+                * [rated movies list] (ADDITIONAL)
+                ]
+            </div>
+
+            <hr/>
         </header>
     );
 };
