@@ -2,7 +2,6 @@ import {FC} from "react";
 import {IMovie} from "../../models/IMovie";
 import PosterPreviewComponent from "../PosterPreview/PosterPreviewComponent";
 import {Link} from "react-router-dom";
-import {useAppSelector} from "../../redux/store";
 import GenreBadgeComponent from "../GenreBadge/GenreBadgeComponent";
 
 interface IProps {
