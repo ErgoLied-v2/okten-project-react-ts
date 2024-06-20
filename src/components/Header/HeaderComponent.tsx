@@ -7,7 +7,7 @@ const HeaderComponent = () => {
 
             <NavLink to={'/'}>[all movies]</NavLink>
 
-            <NavLink to={'genres'}>[genres list]</NavLink>
+            <NavLink to={'genres'}>[genres]</NavLink>
 
             <div> [search movies component]</div>
 
