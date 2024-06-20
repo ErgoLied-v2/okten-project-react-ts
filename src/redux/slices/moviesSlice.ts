@@ -20,11 +20,11 @@ const initialState: MoviesSliceType = {
     error: null
 }
 
-const loadMovies = createAsyncThunk<IMoviesPaginated, void, { rejectValue: string }>(
+const loadMovies = createAsyncThunk<IMoviesPaginated, string, { rejectValue: string }>(
     'MoviesSlice/loadMovies',
-    async (_, thunkAPI) => {
+    async (page: string, thunkAPI) => {
         try {
-            const movies = await moviesService.getAll();
+            const movies = await moviesService.getAll(page || '1');
             thunkAPI.dispatch(moviesActions.changeLoadState(true));
             return thunkAPI.fulfillWithValue(movies);
 

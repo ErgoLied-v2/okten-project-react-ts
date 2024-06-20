@@ -3,8 +3,10 @@ import {urls} from "../constants/urls";
 import {IMoviesPaginated} from "../models/IMoviesPaginated";
 
 export const moviesService = {
-    getAll: async ():Promise<IMoviesPaginated> => {
-        const response = await axiosInstance.get<IMoviesPaginated>(urls.movies.base);
+    getAll: async (page: string):Promise<IMoviesPaginated> => {
+        const response = await axiosInstance.get<IMoviesPaginated>(
+            urls.movies.base,
+            {params: {page: page}});
         return response.data;
     },
 

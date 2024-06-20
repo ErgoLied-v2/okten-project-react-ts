@@ -1,17 +1,18 @@
 import MovieInfoComponent from "../../components/MovieInfo/MovieInfoComponent";
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {IMovie} from "../../models/IMovie";
 import {useEffect} from "react";
 import {moviesActions} from "../../redux/slices/moviesSlice";
 
 const MoviePage = () => {
+    const [query] = useSearchParams();
     const {movieID} = useParams();
     const {isLoaded, moviesPaginated, error} = useAppSelector(state => state.moviesSlice);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(moviesActions.loadMovies());
+        dispatch(moviesActions.loadMovies(query.get('page') || '1'));
     }, []);
 
     let movie: IMovie | undefined;
