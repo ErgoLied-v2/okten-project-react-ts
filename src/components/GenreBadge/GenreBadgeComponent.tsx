@@ -1,5 +1,7 @@
 import React, {FC} from "react";
 import {useAppSelector} from "../../redux/store";
+import Badge from 'react-bootstrap/Badge';
+
 
 interface IProps {
     genreID: number;
@@ -12,9 +14,10 @@ const GenreBadgeComponent: FC<IProps> = ({genreID}) => {
 
     return (
         <div>
-            {
-                genre && genre.name
-            }
+            <Badge bg="secondary">
+                {genre && genre.name}
+            </Badge>
+
         </div>
     );
 };
