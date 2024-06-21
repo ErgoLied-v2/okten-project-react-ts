@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, PropsWithChildren, ReactNode} from "react";
 import {useAppSelector} from "../../redux/store";
 import Badge from 'react-bootstrap/Badge';
 
@@ -12,11 +12,14 @@ const GenreBadgeComponent: FC<IProps> = ({genreID}) => {
 
     const genre = genres.find(genre => genre.id === genreID);
 
+    const BadgeFixed = Badge as unknown as React.FC<PropsWithChildren<{ children: ReactNode, bg:string }>>;
+
+
     return (
         <div>
-            <Badge bg="secondary">
+            <BadgeFixed bg="secondary">
                 {genre && genre.name}
-            </Badge>
+            </BadgeFixed>
 
         </div>
     );
