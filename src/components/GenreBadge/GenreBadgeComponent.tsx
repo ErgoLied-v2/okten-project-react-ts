@@ -1,4 +1,4 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import {useAppSelector} from "../../redux/store";
 
 interface IProps {
@@ -8,9 +8,13 @@ interface IProps {
 const GenreBadgeComponent: FC<IProps> = ({genreID}) => {
     const {genres} = useAppSelector(state => state.genresSlice);
 
+    const genre = genres.find(genre => genre.id === genreID);
+
     return (
         <div>
-            {genres.find(genre => genre.id === genreID)?.name}
+            {
+                genre && genre.name
+            }
         </div>
     );
 };
