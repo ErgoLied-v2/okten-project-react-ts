@@ -1,6 +1,7 @@
 import {NavLink} from "react-router-dom";
 import ThemeSwitcherComponent from "../ThemeSwitcher/ThemeSwitcherComponent";
 import GenresDropDownComponent from "../GenresDropDown/GenresDropDownComponent";
+import SearchMovieComponent from "../SearchMovie/SearchMovieComponent";
 
 const HeaderComponent = () => {
     return (
@@ -11,7 +12,7 @@ const HeaderComponent = () => {
 
             <GenresDropDownComponent/>
 
-            <div> [search movies component]</div>
+            <SearchMovieComponent/>
 
             <div> [user account info
                 * [rated movies list] (ADDITIONAL)
