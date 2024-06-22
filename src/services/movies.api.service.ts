@@ -10,8 +10,10 @@ export const moviesService = {
         return response.data;
     },
 
-    // search: async (): Promise<> => {
-    //     const response = await axiosInstance.get<>(urls.movies.search(???))
-    //     return response.data;
-    // }
+    search: async (query: string): Promise<IMoviesPaginated> => {
+        const response = await axiosInstance.get<IMoviesPaginated>(
+            urls.movies.search,
+            {params: {query: query}});
+        return response.data;
+    }
 }

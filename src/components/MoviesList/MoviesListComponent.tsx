@@ -13,6 +13,7 @@ const MoviesListComponent = () => {
                     ? moviesPaginated.results.map(movie => <MoviesListCardComponent key={movie.id} movie={movie}/>)
                     : <h2>loading...</h2>
             }
+
         </div>
     );
 };

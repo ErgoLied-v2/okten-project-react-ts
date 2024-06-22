@@ -35,6 +35,20 @@ const loadMovies = createAsyncThunk<IMoviesPaginated, string, { rejectValue: str
     }
 );
 
+const loadSearchedMovies = createAsyncThunk<IMoviesPaginated, string, {rejectValue: string}>(
+    'MoviesSlice/loadSearchedMovies',
+    async (query: string, thunkAPI) => {
+        try {
+            const searchedMovies = await moviesService.search(query);
+            thunkAPI.dispatch(moviesActions.changeLoadState(true));
+            return thunkAPI.fulfillWithValue(searchedMovies);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(JSON.stringify(error.response?.data) || 'unknown error');
+        }
+    }
+);
+
 export const moviesSlice = createSlice({
     name: 'MoviesSlice',
     initialState,
@@ -51,20 +65,32 @@ export const moviesSlice = createSlice({
                     state.moviesPaginated = action.payload;
                 }
             )
+            // .addCase(
+            //     loadMovies.rejected,
+            //     (state, action: PayloadAction<string | undefined>) => {
+            //         state.error = action.payload ?? 'unknown error';
+            //     }
+            // )
             .addCase(
-                loadMovies.rejected,
-                (state, action: PayloadAction<string | undefined>) => {
-                    state.error = action.payload ?? 'unknown error';
+                loadSearchedMovies.fulfilled,
+                (state, action) => {
+                    state.moviesPaginated = action.payload;
                 }
             )
+            // .addCase(
+            //     loadSearchedMovies.rejected,
+            //     (state, action: PayloadAction<string | undefined>) => {
+            //         state.error = action.payload ?? 'unknown error';
+            //     }
+            // )
             .addMatcher(
-                isFulfilled(loadMovies),
+                isFulfilled(loadMovies, loadSearchedMovies),
                 (state, action) => {
                     state.isLoaded = true;
                 }
             )
             .addMatcher(
-                isRejected(loadMovies),
+                isRejected(loadMovies, loadSearchedMovies),
                 (state, action) => {
                     state.error = action.payload ?? 'unknown error';
                 }
@@ -72,4 +98,4 @@ export const moviesSlice = createSlice({
 });
 
 
-export const moviesActions = {...moviesSlice.actions, loadMovies}
+export const moviesActions = {...moviesSlice.actions, loadMovies, loadSearchedMovies}

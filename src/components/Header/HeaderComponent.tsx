@@ -1,18 +1,21 @@
 import {NavLink} from "react-router-dom";
+import ThemeSwitcherComponent from "../ThemeSwitcher/ThemeSwitcherComponent";
+import GenresDropDownComponent from "../GenresDropDown/GenresDropDownComponent";
 
 const HeaderComponent = () => {
     return (
         <header>
-            <div> [toggler]</div>
+            <ThemeSwitcherComponent/>
 
             <NavLink to={'/'}>[all movies]</NavLink>
 
-            <NavLink to={'genres'}>[genres]</NavLink>
+            <GenresDropDownComponent/>
 
             <div> [search movies component]</div>
 
             <div> [user accaunt info
                 * [rated movies list] (ADDITIONAL)
+                GUEST SESSION!!!!!
                 ]
             </div>
 

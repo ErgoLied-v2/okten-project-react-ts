@@ -1,0 +1,16 @@
+.two-column-list{
+    width: 50vw;
+}
+
+.two-column-list{
+    column-count: 3;
+    column-gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.two-column-list li {
+    break-inside: avoid;
+    padding: 2px 0;
+}

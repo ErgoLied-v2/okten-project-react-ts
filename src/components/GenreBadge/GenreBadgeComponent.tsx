@@ -1,7 +1,6 @@
-import React, {FC, PropsWithChildren, ReactNode} from "react";
+import React, {FC} from "react";
 import {useAppSelector} from "../../redux/store";
-import Badge from 'react-bootstrap/Badge';
-
+import {BadgeFixed} from "../BootstrapFixed/BootstrapFixedComponents";
 
 interface IProps {
     genreID: number;
@@ -12,16 +11,10 @@ const GenreBadgeComponent: FC<IProps> = ({genreID}) => {
 
     const genre = genres.find(genre => genre.id === genreID);
 
-    const BadgeFixed = Badge as unknown as React.FC<PropsWithChildren<{ children: ReactNode, bg:string }>>;
-
-
     return (
-        <div>
-            <BadgeFixed bg="secondary">
-                {genre && genre.name}
-            </BadgeFixed>
-
-        </div>
+        <BadgeFixed bg="secondary">
+            {genre && genre.name}
+        </BadgeFixed>
     );
 };
 

@@ -2,6 +2,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/store";
 import GenreItemComponent from "../GenreItem/GenreItemComponent";
 import {useEffect} from "react";
 import {genresActions} from "../../redux/slices/genresSlice";
+import './GenresListComponent.css';
 
 const GenresListComponent = () => {
     const dispatch = useAppDispatch();
@@ -12,9 +13,11 @@ const GenresListComponent = () => {
     }, []);
 
     return (
-        <ul>
-            {genres.map(genre => <GenreItemComponent key={genre.id} genre={genre}/>)}
-        </ul>
+        <div >
+            <ul className={'two-column-list'}>
+                {genres.map(genre => <GenreItemComponent key={genre.id} genre={genre}/>)}
+            </ul>
+        </div>
     );
 };
 

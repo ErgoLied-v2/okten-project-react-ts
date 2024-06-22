@@ -20,9 +20,6 @@ const MoviePage = () => {
         movie = moviesPaginated.results.find(movie => movie.id === parseInt(movieID));
     }
 
-    console.warn('if reload - movieID disappear and here is endless /loading/ ');
-    console.warn('do something with this');
-
     return (
         <>
             {
