@@ -1,23 +1,19 @@
-import MovieInfoComponent from "../../components/MovieInfo/MovieInfoComponent";
 import {useParams} from "react-router-dom";
 import {useAppSelector} from "../../redux/store";
 import {IMovie} from "../../models/IMovie";
+import MovieInfoComponent from "../../components/MovieInfo/MovieInfoComponent";
 
-const MoviePage = () => {
+const MovieByGenrePage = () => {
     const {movieID} = useParams();
     const {
         isLoaded,
-        moviesPaginated,
-        searchedMoviesPaginated,
+        searchedMoviesByGenre,
         error
     } = useAppSelector(state => state.moviesSlice);
 
     let movie: IMovie | undefined;
-
     if (movieID) {
-        searchedMoviesPaginated.results.length > 0
-            ? movie = searchedMoviesPaginated.results.find(movie => movie.id === parseInt(movieID))
-            : movie = moviesPaginated.results.find(movie => movie.id === parseInt(movieID));
+            movie = searchedMoviesByGenre.results.find(movie => movie.id === parseInt(movieID))
     }
 
     return (
@@ -35,4 +31,4 @@ const MoviePage = () => {
     );
 };
 
-export default MoviePage;
+export default MovieByGenrePage;

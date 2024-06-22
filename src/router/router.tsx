@@ -3,15 +3,18 @@ import App from "../App";
 import MoviesPage from "../pages/MoviesPage/MoviesPage";
 import MoviePage from "../pages/MoviePage/MoviePage";
 import GenresListComponent from "../components/GenresList/GenresListComponent";
+import MoviesByGenrePage from "../pages/MoviesByGenrePage/MoviesByGenrePage";
+import MovieByGenrePage from "../pages/MovieByGenrePage/MovieByGenrePage";
 
 const routes: RouteObject[] = [{
     path: '', element: <App/>, children: [
         {index: true, element: <MoviesPage/>},
-        {path: '/:movieID', element: <MoviePage/>}, //add load single movie on moviepage
-        {path: '/genres', element: <GenresListComponent/>}, //add genre page and load genres there
-        {path: '/genres/:genreID', element: <div>movies list by genre</div>}
-        //   '/?searchParams=??????'
-        // * '/ratedMovies'
+        {path: '/:movieID', element: <MoviePage/>},
+        {path: '/genres', element: <GenresListComponent/>},
+        {path: '/genres/:genreID', element: <MoviesByGenrePage/>},
+        {path: '/genres/:genreID/:movieID', element: <MovieByGenrePage/>}
+
+        // * 'guest/ratedMovies'
 
     ]
 }];

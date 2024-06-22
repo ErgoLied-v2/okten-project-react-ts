@@ -4,7 +4,7 @@ import GenresDropDownComponent from "../GenresDropDown/GenresDropDownComponent";
 
 const HeaderComponent = () => {
     return (
-        <header>
+        <header className={'flex'}>
             <ThemeSwitcherComponent/>
 
             <NavLink to={'/'}>[all movies]</NavLink>
@@ -13,7 +13,7 @@ const HeaderComponent = () => {
 
             <div> [search movies component]</div>
 
-            <div> [user accaunt info
+            <div> [user account info
                 * [rated movies list] (ADDITIONAL)
                 GUEST SESSION!!!!!
                 ]

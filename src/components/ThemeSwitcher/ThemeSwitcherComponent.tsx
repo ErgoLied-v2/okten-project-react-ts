@@ -1,9 +1,16 @@
-import {FormCheckFixed} from "../BootstrapFixed/BootstrapFixedComponents";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {changeMod} from "../../redux/slices/themeModSlice";
 
 const ThemeSwitcherComponent = () => {
+    const {mod} = useAppSelector(state => state.themeModSlice);
+    const dispatch = useAppDispatch();
+    const changeThemeMod = () => {
+        dispatch(changeMod())
+    }
+
     return (
         <div>
-            <FormCheckFixed type="switch" id="custom-switch" label="Check this switch"/>
+            <button onClick={changeThemeMod}>mod: {mod}</button>
         </div>
     );
 };
