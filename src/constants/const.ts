@@ -1,0 +1,1 @@
+export const GUEST_SESSION_ID = 'guest_session_id';

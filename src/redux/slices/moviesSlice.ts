@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice, isFulfilled, isRejected, PayloadAction} f
 import {AxiosError} from "axios";
 import {moviesService} from "../../services/movies.api.service";
 import {IMoviesPaginated} from "../../models/IMoviesPaginated";
+import {IRatingResponse} from "../../models/IRatingResponse";
 
 type MoviesSliceType = {
     moviesPaginated: IMoviesPaginated;
@@ -79,6 +80,34 @@ const loadSearchMoviesByGenre = createAsyncThunk<IMoviesPaginated, { genreID: st
     }
 );
 
+const addRating = createAsyncThunk<IRatingResponse, { movieID: string; guestSessionId: string; rate: number }, {
+    rejectValue: string
+}>(
+    'movies/addRating',
+    async ({movieID, guestSessionId, rate}, thunkAPI) => {
+        try {
+            return await moviesService.addRating(movieID, guestSessionId, rate);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(JSON.stringify(error.response?.data) || 'unknown error');
+        }
+    }
+);
+
+const deleteRating = createAsyncThunk<IRatingResponse, { movieID: string; guestSessionId: string }, {
+    rejectValue: string
+}>(
+    'movies/addRating',
+    async ({movieID, guestSessionId}, thunkAPI) => {
+        try {
+            return await moviesService.deleteRating(movieID, guestSessionId);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(JSON.stringify(error.response?.data) || 'unknown error');
+        }
+    }
+);
+
 export const moviesSlice = createSlice({
     name: 'MoviesSlice',
     initialState,
@@ -137,6 +166,11 @@ export const moviesSlice = createSlice({
                 }
             )
             .addMatcher(
+                isFulfilled(addRating, deleteRating),
+                (state, action) => {
+                }
+            )
+            .addMatcher(
                 isRejected(loadMovies, loadSearchedMovies),
                 (state, action) => {
                     state.error = action.payload ?? 'unknown error';
@@ -144,4 +178,10 @@ export const moviesSlice = createSlice({
             )
 });
 
-export const moviesActions = {...moviesSlice.actions, loadMovies, loadSearchedMovies, loadSearchMoviesByGenre}
+export const moviesActions = {
+    ...moviesSlice.actions,
+    loadMovies,
+    loadSearchedMovies,
+    loadSearchMoviesByGenre,
+    addRating, deleteRating
+}

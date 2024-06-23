@@ -1,6 +1,10 @@
 const baseURL = 'https://api.themoviedb.org/3'
 
 const urls = {
+    auth: {
+        guest: '/authentication/guest_session/new'
+    },
+
     movies: {
         base: '/discover/movie',
         search: '/search/movie'
@@ -8,8 +12,8 @@ const urls = {
 
     movie: {
         base: (id: string) => '/movie/' + id,
-        states: (id: string) => urls.movie.base(id) + '/account_states',
         rating: (id: string) => urls.movie.base(id) + '/rating'
+        // states: (id: string) => urls.movie.base(id) + '/account_states',
     },
 
     genres: {

@@ -3,11 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {moviesSlice} from "./slices/moviesSlice";
 import {genresSlice} from "./slices/genresSlice";
 import {themeModSlice} from "./slices/themeModSlice";
+import {authSlice} from "./slices/authSlice";
 
 export const store = configureStore({
     reducer: {
-        moviesSlice: moviesSlice.reducer,
+        authSlice: authSlice.reducer,
         genresSlice: genresSlice.reducer,
+        moviesSlice: moviesSlice.reducer,
         themeModSlice: themeModSlice.reducer
     }
 });

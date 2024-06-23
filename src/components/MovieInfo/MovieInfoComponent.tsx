@@ -20,7 +20,7 @@ const MovieInfoComponent: FC<IProps> = ({movie}) => {
             <p>popularity: {movie.popularity}</p>
             <p>vote_average: {movie.vote_average}</p>
             <p>vote_count: {movie.vote_count}</p>
-            <StarsRatingComponent/>
+            <StarsRatingComponent initialValue={movie.vote_average} movieID={movie.id}/>
 
             <PosterPreviewComponent path={movie.poster_path} title={movie.title}/>
             <h2>overview</h2>
