@@ -9,31 +9,36 @@ interface IProps {
 }
 
 const StarsRatingComponent: FC<IProps> = ({initialValue, movieID}) => {
-    const {isLoaded, guestSessionId} = useAppSelector(state => state.authSlice);
+    const {accountStates} = useAppSelector(state => state.moviesSlice);
     const dispatch = useAppDispatch();
+    const id = movieID.toString();
 
     const [rating, setRating] = useState<number>(initialValue);
 
-    // useEffect(() => {
-    //     setRating(initialValue);
-    // }, [initialValue]);
+    useEffect(() => {
+        dispatch(moviesActions.loadAccountStates(id));
+    }, [id]);
+
+    useEffect(() => {
+        if (accountStates.rated) {
+            setRating(accountStates.rated.value);
+        } else {
+            setRating(initialValue);
+        }
+    }, [accountStates, initialValue]);
 
     const changeRating = async (rate: number) => {
-        if (guestSessionId) {
-            const id = movieID.toString();
-
-            if (rate !== rating) {
-                const res = await dispatch(moviesActions.addRating({movieID: id, guestSessionId, rate}));
-                if (moviesActions.addRating.fulfilled.match(res)) {
-                    setRating(rate);
-                }
-            } else {
-                const res = await dispatch(moviesActions.deleteRating({movieID: id, guestSessionId}));
-                if (moviesActions.deleteRating.fulfilled.match(res)) {
-                    setRating(initialValue);
-                }
-
+        if (rate !== rating) {
+            const res = await dispatch(moviesActions.addRating({movieID: id, rate}));
+            if (moviesActions.addRating.fulfilled.match(res)) {
+                setRating(rate);
             }
+        } else {
+            const res = await dispatch(moviesActions.deleteRating({movieID: id}));
+            if (moviesActions.deleteRating.fulfilled.match(res)) {
+                setRating(initialValue);
+            }
+
         }
     }
 
@@ -43,7 +48,6 @@ const StarsRatingComponent: FC<IProps> = ({initialValue, movieID}) => {
                 allowFraction
                 initialValue={rating}
                 iconsCount={10}
-                readonly={!isLoaded}
                 // transition
                 fillColor={'red'}
                 onClick={changeRating}

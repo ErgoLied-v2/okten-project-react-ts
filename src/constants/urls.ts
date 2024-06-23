@@ -12,8 +12,8 @@ const urls = {
 
     movie: {
         base: (id: string) => '/movie/' + id,
-        rating: (id: string) => urls.movie.base(id) + '/rating'
-        // states: (id: string) => urls.movie.base(id) + '/account_states',
+        rating: (id: string) => urls.movie.base(id) + '/rating',
+        states: (id: string) => urls.movie.base(id) + '/account_states'
     },
 
     genres: {

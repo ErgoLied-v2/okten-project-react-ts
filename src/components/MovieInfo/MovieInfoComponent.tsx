@@ -1,18 +1,18 @@
 import {FC} from "react";
-import {IMovie} from "../../models/IMovie";
 import PosterPreviewComponent from "../PosterPreview/PosterPreviewComponent";
 import GenreBadgeComponent from "../GenreBadge/GenreBadgeComponent";
 import StarsRatingComponent from "../StarsRating/StarsRatingComponent";
+import {IMovieByID} from "../../models/IMovieByID";
 
 interface IProps {
-    movie: IMovie;
+    movie: IMovieByID;
 }
 
 const MovieInfoComponent: FC<IProps> = ({movie}) => {
     return (
         <div>
             <p>{movie.title}</p>
-            {movie.genre_ids.map(genre => <GenreBadgeComponent key={genre} genreID={genre}/>)}
+            {movie.genres.map(genre => <GenreBadgeComponent key={genre.id} genreID={genre.id}/>)}
             <hr/>
             <p>original_title: {movie.original_title}</p>
             <p>original_language: {movie.original_language}</p>

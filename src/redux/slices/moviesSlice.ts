@@ -3,12 +3,16 @@ import {AxiosError} from "axios";
 import {moviesService} from "../../services/movies.api.service";
 import {IMoviesPaginated} from "../../models/IMoviesPaginated";
 import {IRatingResponse} from "../../models/IRatingResponse";
+import {IAccountStates} from "../../models/IAccountStates";
+import {IMovieByID} from "../../models/IMovieByID";
 
 type MoviesSliceType = {
     moviesPaginated: IMoviesPaginated;
     searchedMoviesPaginated: IMoviesPaginated;
     searchedMoviesByGenre: IMoviesPaginated;
+    selectedMovie: IMovieByID | null;
     isLoaded: boolean;
+    accountStates: IAccountStates;
     error: string | null;
 }
 
@@ -31,7 +35,15 @@ const initialState: MoviesSliceType = {
         total_results: 0,
         results: []
     },
+    selectedMovie: null,
     isLoaded: false,
+    accountStates: {
+        id: null,
+        favorite: false,
+        rated: false,
+        watchlist: false
+    },
+
     error: null
 }
 
@@ -80,13 +92,12 @@ const loadSearchMoviesByGenre = createAsyncThunk<IMoviesPaginated, { genreID: st
     }
 );
 
-const addRating = createAsyncThunk<IRatingResponse, { movieID: string; guestSessionId: string; rate: number }, {
-    rejectValue: string
-}>(
-    'movies/addRating',
-    async ({movieID, guestSessionId, rate}, thunkAPI) => {
+const loadMovieByID = createAsyncThunk<IMovieByID, string, { rejectValue: string }>(
+    'MoviesSlice/loadMovieByID',
+    async (movieID: string, thunkAPI) => {
         try {
-            return await moviesService.addRating(movieID, guestSessionId, rate);
+            const movie = await moviesService.getByID(movieID);
+            return thunkAPI.fulfillWithValue(movie);
         } catch (e) {
             const error = e as AxiosError;
             return thunkAPI.rejectWithValue(JSON.stringify(error.response?.data) || 'unknown error');
@@ -94,13 +105,40 @@ const addRating = createAsyncThunk<IRatingResponse, { movieID: string; guestSess
     }
 );
 
-const deleteRating = createAsyncThunk<IRatingResponse, { movieID: string; guestSessionId: string }, {
+const loadAccountStates = createAsyncThunk(
+    'MoviesSlice/loadAccountStates',
+    async (movieID: string, thunkAPI) => {
+        try {
+            const accountStates = await moviesService.getAccountStates(movieID);
+            return thunkAPI.fulfillWithValue(accountStates);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(JSON.stringify(error.response?.data) || 'unknown error');
+        }
+    }
+);
+
+const addRating = createAsyncThunk<IRatingResponse, { movieID: string; rate: number }, {
     rejectValue: string
 }>(
-    'movies/addRating',
-    async ({movieID, guestSessionId}, thunkAPI) => {
+    'MoviesSlice/addRating',
+    async ({movieID, rate}, thunkAPI) => {
         try {
-            return await moviesService.deleteRating(movieID, guestSessionId);
+            return await moviesService.addRating(movieID, rate);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(JSON.stringify(error.response?.data) || 'unknown error');
+        }
+    }
+);
+
+const deleteRating = createAsyncThunk<IRatingResponse, { movieID: string }, {
+    rejectValue: string
+}>(
+    'MoviesSlice/addRating',
+    async ({movieID}, thunkAPI) => {
+        try {
+            return await moviesService.deleteRating(movieID);
         } catch (e) {
             const error = e as AxiosError;
             return thunkAPI.rejectWithValue(JSON.stringify(error.response?.data) || 'unknown error');
@@ -117,10 +155,7 @@ export const moviesSlice = createSlice({
         },
         clearSearchedMovies: (state) => {
             state.searchedMoviesPaginated = initialState.searchedMoviesPaginated;
-        },
-        clearSearchMoviesByGenre: (state) => {
-            state.searchedMoviesByGenre = initialState.searchedMoviesByGenre;
-        },
+        }
     },
     extraReducers: builder =>
         builder
@@ -159,8 +194,25 @@ export const moviesSlice = createSlice({
                 (state, action: PayloadAction<string | undefined>) => {
                     state.error = action.payload ?? 'unknown error';
                 })
+            .addCase(
+                loadMovieByID.fulfilled,
+                (state, action) => {
+                    state.selectedMovie = action.payload;
+                }
+            )
+            .addCase(
+                loadMovieByID.rejected,
+                (state, action: PayloadAction<string | undefined>) => {
+                    state.error = action.payload ?? 'unknown error';
+                })
+            .addCase(
+                loadAccountStates.fulfilled,
+                (state, action) => {
+                    state.accountStates = action.payload;
+                }
+            )
             .addMatcher(
-                isFulfilled(loadMovies, loadSearchedMovies),
+                isFulfilled(loadMovies, loadSearchedMovies, loadSearchMoviesByGenre, loadMovieByID),
                 (state, action) => {
                     state.isLoaded = true;
                 }
@@ -171,9 +223,10 @@ export const moviesSlice = createSlice({
                 }
             )
             .addMatcher(
-                isRejected(loadMovies, loadSearchedMovies),
+                isRejected(loadMovies, loadSearchedMovies, loadSearchMoviesByGenre, loadMovieByID),
                 (state, action) => {
                     state.error = action.payload ?? 'unknown error';
+                    state.isLoaded = false;
                 }
             )
 });
@@ -183,5 +236,7 @@ export const moviesActions = {
     loadMovies,
     loadSearchedMovies,
     loadSearchMoviesByGenre,
+    loadMovieByID,
+    loadAccountStates,
     addRating, deleteRating
 }

@@ -3,20 +3,29 @@ import {IMovie} from "../../models/IMovie";
 import PosterPreviewComponent from "../PosterPreview/PosterPreviewComponent";
 import {Link} from "react-router-dom";
 import GenreBadgeComponent from "../GenreBadge/GenreBadgeComponent";
+import {useAppDispatch} from "../../redux/store";
+import {moviesActions} from "../../redux/slices/moviesSlice";
 
 interface IProps {
     movie: IMovie;
 }
 
 const MoviesListCardComponent: FC<IProps> = ({movie}) => {
+    const dispatch = useAppDispatch();
+
+    const setSelectedMovie = ()=> {
+        dispatch(moviesActions.loadMovieByID(movie.id.toString()));
+    }
 
     return (
-        <Link to={movie.id.toString()}>
+        <div onClick={()=>setSelectedMovie}>
+        <Link to={movie.id.toString()} >
             <PosterPreviewComponent path={movie.poster_path} title={movie.title}/>
             <p>{movie.title}</p>
 
             {movie.genre_ids.map(genre => <GenreBadgeComponent key={genre} genreID={genre}/>)}
         </Link>
+        </div>
     );
 };
 

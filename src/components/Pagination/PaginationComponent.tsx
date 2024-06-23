@@ -9,29 +9,35 @@ import {useAppSelector} from "../../redux/store";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 
 const PaginationComponent = () => {
-    const {moviesPaginated, searchedMoviesPaginated, searchedMoviesByGenre} = useAppSelector(state => state.moviesSlice);
-    const [query] = useSearchParams();
+    const {
+        moviesPaginated,
+        searchedMoviesPaginated,
+        searchedMoviesByGenre
+    } = useAppSelector(state => state.moviesSlice);
+    const [query, setQuery] = useSearchParams();
     const {genreID} = useParams();
     const navigate = useNavigate();
+    const searchQuery = query.get('query') || '';
 
     let currentPage: number;
     let totalPages: number;
-    if (searchedMoviesPaginated.results.length > 0) {
+
+    if (searchQuery && searchedMoviesPaginated.results.length > 0) {
         currentPage = searchedMoviesPaginated.page;
         totalPages = searchedMoviesPaginated.total_pages >= 500 ? 500 : searchedMoviesPaginated.total_pages;
-    }
-    else if(genreID && searchedMoviesByGenre.results.length>0){
+    } else if (genreID && searchedMoviesByGenre.results.length > 0) {
         currentPage = searchedMoviesByGenre.page;
         totalPages = searchedMoviesByGenre.total_pages >= 500 ? 500 : searchedMoviesByGenre.total_pages;
-    }
-    else {
+    } else {
         currentPage = moviesPaginated.page;
         totalPages = moviesPaginated.total_pages >= 500 ? 500 : moviesPaginated.total_pages;
     }
+
     const onPageClick = (page: number) => {
-        query.set('page', page.toString());
-        navigate({search: query.toString()});
-    }
+        const url = `?page=${page}${searchQuery ? `&query=${searchQuery}` : ''}`;
+        navigate(url, { replace: true });
+    };
+
     const onFirstPageClick = () => onPageClick(1);
     const onPrevPageClick = () => onPageClick(currentPage > 1 ? currentPage - 1 : 1);
     const onNextPageClick = () => onPageClick(currentPage < totalPages ? currentPage + 1 : totalPages);

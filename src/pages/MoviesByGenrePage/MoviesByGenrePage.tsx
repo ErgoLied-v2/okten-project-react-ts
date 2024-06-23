@@ -1,5 +1,5 @@
 import {useParams, useSearchParams} from "react-router-dom";
-import {useAppDispatch} from "../../redux/store";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {useEffect} from "react";
 import {moviesActions} from "../../redux/slices/moviesSlice";
 import MoviesListComponent from "../../components/MoviesList/MoviesListComponent";
@@ -9,14 +9,17 @@ const MoviesByGenrePage = () => {
     const {genreID} = useParams();
     const [query] = useSearchParams();
     const dispatch = useAppDispatch();
+    const {searchedMoviesByGenre} = useAppSelector(state => state.moviesSlice);
 
-    const page = query.get('page') || '1';
+
     useEffect(() => {
-        if (genreID) {
+        const page = query.get('page') || '1';
+        // if (genreID && searchedMoviesByGenre.results.length === 0) {
+        if (genreID ) {
             dispatch(moviesActions.loadSearchMoviesByGenre({genreID, page}));
-            dispatch(moviesActions.clearSearchedMovies());
+            // dispatch(moviesActions.clearSearchedMovies());
         }
-    }, [genreID, page]);
+    }, [genreID, query, searchedMoviesByGenre.results.length]);
 
     return (
         <div>
