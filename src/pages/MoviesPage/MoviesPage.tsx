@@ -1,6 +1,6 @@
 import MoviesListComponent from "../../components/MoviesList/MoviesListComponent";
 import PaginationComponent from "../../components/Pagination/PaginationComponent";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {useAppDispatch} from "../../redux/store";
 import {useEffect} from "react";
 import {moviesActions} from "../../redux/slices/moviesSlice";
@@ -9,6 +9,7 @@ import {genresActions} from "../../redux/slices/genresSlice";
 const MoviesPage = () => {
     const [query] = useSearchParams();
     const dispatch = useAppDispatch();
+
 
     useEffect(() => {
         const page = query.get('page') || '1';
