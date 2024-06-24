@@ -4,7 +4,7 @@ import {NavDropdown, Pagination, Spinner} from "react-bootstrap";
 
 const BadgeFixed = Badge as unknown as FC<PropsWithChildren<{ children: ReactNode, bg: string }>>;
 
-const SpinnerFixed = Spinner as unknown as FC<PropsWithChildren<{ children: ReactNode, animation: string }>>;
+const SpinnerFixed = Spinner as unknown as FC<PropsWithChildren<{ children?: ReactNode, animation: string}>>;
 const PaginationFixed = Pagination as unknown as FC<PropsWithChildren<{ children: ReactNode }>>;
 const PaginationItemFixed = Pagination.Item as unknown as FC<PropsWithChildren<{
     children: ReactNode,

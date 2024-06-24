@@ -2,6 +2,7 @@ import {useForm} from "react-hook-form";
 import {useAppDispatch} from "../../redux/store";
 import {moviesActions} from "../../redux/slices/moviesSlice";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import styles from './SearchMovieComponent.module.css';
 
 interface IFormProps {
     searchBy: string;
@@ -21,26 +22,17 @@ const SearchMovieComponent = () => {
 
     const search = (formDataProps: IFormProps) => {
         dispatch(moviesActions.loadSearchedMovies({query: formDataProps.searchBy, page}));
-        nav('/?query='+formDataProps.searchBy);
+        nav('/?query=' + formDataProps.searchBy);
         reset();
     }
 
     return (
-        <form onSubmit={handleSubmit(search)} style={{ position: 'relative'}}>
-            <input type="text" {...register('searchBy')} placeholder={'search movie...'} style={{
-                width: '100%',
-                padding: '0.5rem 4rem 0.5rem 0.5rem',
-                borderRadius: '4px',
-                border: '1px solid #ccc'
-            }}/>
-            <button style={{
-                position: 'absolute',
-                right: '0.5rem',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                cursor: 'pointer',
-                padding: 0
-            }}>search</button>
+        <form onSubmit={handleSubmit(search)} className={styles.searchForm}>
+            <div className="cyber-input ac-yellow fg-yellow">
+                <input type="text" {...register('searchBy')} placeholder={'search movie...'}/>
+            </div>
+
+            <button className={styles.searchBtn}>search</button>
         </form>
     );
 };

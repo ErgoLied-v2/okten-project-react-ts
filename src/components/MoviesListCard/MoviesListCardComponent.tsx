@@ -13,18 +13,22 @@ interface IProps {
 const MoviesListCardComponent: FC<IProps> = ({movie}) => {
     const dispatch = useAppDispatch();
 
-    const setSelectedMovie = ()=> {
+    const setSelectedMovie = () => {
         dispatch(moviesActions.loadMovieByID(movie.id.toString()));
     }
 
     return (
-        <div onClick={()=>setSelectedMovie}>
-        <Link to={movie.id.toString()} >
-            <PosterPreviewComponent path={movie.poster_path} title={movie.title}/>
-            <p>{movie.title}</p>
+        <div onClick={() => setSelectedMovie}>
+            <Link to={movie.id.toString()}>
+                <div className={'cyber-tile-small fg-dark bg-purple'}>
+                    <PosterPreviewComponent path={movie.poster_path} title={movie.title}/>
+                    <label>{movie.title}</label>
 
-            {movie.genre_ids.map(genre => <GenreBadgeComponent key={genre} genreID={genre}/>)}
-        </Link>
+                    {movie.genre_ids.map(genre => <GenreBadgeComponent key={genre} genreID={genre}/>)}
+                </div>
+
+
+            </Link>
         </div>
     );
 };

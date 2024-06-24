@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {useEffect} from "react";
 import {moviesActions} from "../../redux/slices/moviesSlice";
 import {genresActions} from "../../redux/slices/genresSlice";
+import LoadingComponent from "../../components/Loading/LoadingComponent";
 
 const MoviesPage = () => {
     const [query] = useSearchParams();
@@ -18,9 +19,6 @@ const MoviesPage = () => {
 
         if (searchQuery) {
                 dispatch(moviesActions.loadSearchedMovies({query: searchQuery, page}));
-            if (searchedMoviesPaginated.results.length === 0) {
-                console.log(searchedMoviesPaginated)
-            }
         } else {
             if (moviesPaginated.results.length === 0) {
                 dispatch(moviesActions.loadMovies(page));

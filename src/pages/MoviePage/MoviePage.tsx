@@ -20,13 +20,6 @@ const MoviePage = () => {
         }
     }, []);
 
-    // let movie: IMovie | undefined;
-
-    // if (movieID) {
-    //     searchedMoviesPaginated.results.length > 0
-    //         ? movie = searchedMoviesPaginated.results.find(movie => movie.id === parseInt(movieID))
-    //         : movie = moviesPaginated.results.find(movie => movie.id === parseInt(movieID));
-    // }
 
     return (
         <>

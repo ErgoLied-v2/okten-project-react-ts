@@ -1,0 +1,13 @@
+.searchForm{
+    position: relative;
+}
+
+.searchBtn{
+    position: absolute;
+    z-index: 1;
+    right: 0.5rem;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 0;
+}

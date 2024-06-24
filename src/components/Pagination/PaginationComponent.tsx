@@ -1,10 +1,4 @@
-import {
-    PaginationEllipsisFixed,
-    PaginationFirstFixed,
-    PaginationFixed,
-    PaginationItemFixed, PaginationLastFixed, PaginationNextFixed,
-    PaginationPrevFixed
-} from "../BootstrapFixed/BootstrapFixedComponents";
+import {PaginationFixed, PaginationItemFixed} from "../BootstrapFixed/BootstrapFixedComponents";
 import {useAppSelector} from "../../redux/store";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 
@@ -48,22 +42,24 @@ const PaginationComponent = () => {
     if (totalPages <= 10) {
         for (let i = 1; i <= totalPages; i++) {
             pages.push(
-                <PaginationItemFixed key={i}
-                                     active={i === currentPage}
-                                     onClick={() => onPageClick(i)}>
+                <button key={i}
+                        disabled={i === currentPage}
+                        onClick={() => onPageClick(i)}
+                        className={'cyber-button-small bg-purple fg-white'}>
                     {i}
-                </PaginationItemFixed>
+                </button>
             );
         }
     } else {
         pages.push(
             <button key={1}
                     disabled={1 === currentPage}
-                    onClick={() => onPageClick(1)}>1</button>
+                    onClick={() => onPageClick(1)}
+                    className={'cyber-button-small bg-purple fg-white'}>1</button>
         );
 
         if (currentPage > 4) {
-            pages.push(<button key="start ..." disabled>...</button>);
+            pages.push(<button key="start ..." disabled className={'cyber-button-small bg-purple fg-white'}>...</button>);
         }
 
         let start = currentPage > 4 ? currentPage - 2 : 2;
@@ -79,7 +75,8 @@ const PaginationComponent = () => {
             pages.push(
                 <button key={i}
                         disabled={i === currentPage}
-                        onClick={() => onPageClick(i)}>
+                        onClick={() => onPageClick(i)}
+                        className={'cyber-button-small bg-purple fg-white p-3 m-1'}>
                     {i}
                 </button>
             );
@@ -91,16 +88,20 @@ const PaginationComponent = () => {
         <div>
             <PaginationFixed>
                 <button onClick={onFirstPageClick}
-                        disabled={currentPage === 1}/>
+                        disabled={currentPage === 1}
+                        className={'cyber-button-small bg-purple fg-white'}/>
                 <button onClick={onPrevPageClick}
-                        disabled={currentPage === 1}/>
+                        disabled={currentPage === 1}
+                        className={'cyber-button-small bg-purple fg-white'}/>
 
                 {pages}
 
                 <button onClick={onNextPageClick}
-                        disabled={currentPage === totalPages}/>
+                        disabled={currentPage === totalPages}
+                        className={'cyber-button-small bg-purple fg-white m-0'}/>
                 <button onClick={onLastPageClick}
-                        disabled={currentPage === totalPages}/>
+                        disabled={currentPage === totalPages}
+                        className={'cyber-button-small bg-purple fg-white m-0'}/>
             </PaginationFixed>
         </div>
     );
