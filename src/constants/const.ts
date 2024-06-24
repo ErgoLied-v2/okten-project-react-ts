@@ -1,1 +1,1 @@
-export const GUEST_SESSION_ID = 'guest_session_id';
+export const APIkey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MjE1YmIwOWRkNWM2YjIyYzkzNmU1YTdiNjkxMWRiMiIsInN1YiI6IjYxMmY2ZWVkMzU3YzAwMDA0M2U2ODVlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7oDDIoIqj7qCf3mQGdMnsfk-BqpaptcLGzWUFTYhgQ';
