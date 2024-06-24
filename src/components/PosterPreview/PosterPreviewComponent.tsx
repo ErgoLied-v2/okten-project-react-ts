@@ -1,4 +1,5 @@
 import {FC} from "react";
+import styles from './PosterPreviewComponent.module.css';
 
 interface IProps {
     path: string;
@@ -7,7 +8,13 @@ interface IProps {
 
 const PosterPreviewComponent: FC<IProps> = ({path, title}) => {
     return (
-        <img src={'https://image.tmdb.org/t/p/w500/' + path} alt={title}/>
+        <>
+        {
+            path
+                ? <img src={'https://image.tmdb.org/t/p/w500/' + path} alt={title}/>
+                : <div className={styles.noImg + ' cyber-tile-small'}></div>
+        }
+        </>
     );
 };
 

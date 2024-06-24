@@ -1,8 +1,10 @@
 import {PaginationFixed, PaginationItemFixed} from "../BootstrapFixed/BootstrapFixedComponents";
 import {useAppSelector} from "../../redux/store";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import './PaginationComponent.css';
 
 const PaginationComponent = () => {
+    const {mod} = useAppSelector(state => state.themeModSlice);
     const {
         moviesPaginated,
         searchedMoviesPaginated,
@@ -45,7 +47,7 @@ const PaginationComponent = () => {
                 <button key={i}
                         disabled={i === currentPage}
                         onClick={() => onPageClick(i)}
-                        className={'cyber-button-small bg-purple fg-white'}>
+                        className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>
                     {i}
                 </button>
             );
@@ -55,11 +57,11 @@ const PaginationComponent = () => {
             <button key={1}
                     disabled={1 === currentPage}
                     onClick={() => onPageClick(1)}
-                    className={'cyber-button-small bg-purple fg-white'}>1</button>
+                    className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>1</button>
         );
 
         if (currentPage > 4) {
-            pages.push(<button key="start ..." disabled className={'cyber-button-small bg-purple fg-white'}>...</button>);
+            pages.push(<button key="start ..." disabled className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>...</button>);
         }
 
         let start = currentPage > 4 ? currentPage - 2 : 2;
@@ -76,7 +78,7 @@ const PaginationComponent = () => {
                 <button key={i}
                         disabled={i === currentPage}
                         onClick={() => onPageClick(i)}
-                        className={'cyber-button-small bg-purple fg-white p-3 m-1'}>
+                        className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>
                     {i}
                 </button>
             );
@@ -85,25 +87,31 @@ const PaginationComponent = () => {
 
 
     return (
-        <div>
             <PaginationFixed>
                 <button onClick={onFirstPageClick}
                         disabled={currentPage === 1}
-                        className={'cyber-button-small bg-purple fg-white'}/>
+                        className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>
+                    {'<<'}
+                </button>
                 <button onClick={onPrevPageClick}
                         disabled={currentPage === 1}
-                        className={'cyber-button-small bg-purple fg-white'}/>
+                        className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>
+                    {'<'}
+                </button>
 
                 {pages}
 
                 <button onClick={onNextPageClick}
                         disabled={currentPage === totalPages}
-                        className={'cyber-button-small bg-purple fg-white m-0'}/>
+                        className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>
+                    {'>'}
+                </button>
                 <button onClick={onLastPageClick}
                         disabled={currentPage === totalPages}
-                        className={'cyber-button-small bg-purple fg-white m-0'}/>
+                        className={`cyber-button-small custom-bg-accent-${mod} fg-yellow p-2 m-1`}>
+                    {'>>'}
+                </button>
             </PaginationFixed>
-        </div>
     );
 };
 

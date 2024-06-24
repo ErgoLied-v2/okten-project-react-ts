@@ -1,0 +1,19 @@
+.movie-container{
+    width: 65vw;
+    margin-left: 20px;
+}
+
+iframe{
+    width: 80%;
+    height: 40vw;
+}
+
+.video{
+    display: flex;
+    justify-content: center;
+}
+
+.m-100{
+    margin-bottom: 100px;
+    margin-top: 70px;
+}

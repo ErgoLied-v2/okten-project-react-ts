@@ -5,9 +5,12 @@
 .searchBtn{
     position: absolute;
     z-index: 1;
-    right: 0.5rem;
-    top: 40%;
+    right: 0.3rem;
+    top: 35%;
     transform: translateY(-50%);
     cursor: pointer;
     padding: 0;
+    background: none;
+    border: none;
+    fill: #feef00;
 }

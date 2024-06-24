@@ -9,6 +9,7 @@ interface IProps {
 }
 
 const StarsRatingComponent: FC<IProps> = ({initialValue, movieID}) => {
+    const {mod} = useAppSelector(state => state.themeModSlice);
     const {accountStates} = useAppSelector(state => state.moviesSlice);
     const dispatch = useAppDispatch();
     const id = movieID.toString();
@@ -42,6 +43,8 @@ const StarsRatingComponent: FC<IProps> = ({initialValue, movieID}) => {
         }
     }
 
+    const fillColor = mod==='dark' ? '#f8ef02':'purple';
+
     return (
         <div>
             <Rating
@@ -49,7 +52,7 @@ const StarsRatingComponent: FC<IProps> = ({initialValue, movieID}) => {
                 initialValue={rating}
                 iconsCount={10}
                 // transition
-                fillColor={'red'}
+                fillColor={fillColor}
                 onClick={changeRating}
             />
         </div>

@@ -1,0 +1,3 @@
+.genresContainer{
+    min-height: calc(100vh - 140px - 60px); /* header and footer 70px + razor line 30px*/
+}

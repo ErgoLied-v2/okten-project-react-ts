@@ -5,30 +5,6 @@
  * Free to use - do whatever the _ you want...
  */
 
-/*#region fonts*/
-@font-face
-{
-    font-family:BlenderProBook;
-    font-style:normal;
-    font-weight:400;
-    src:url(../public/fonts/BlenderProBook.woff2) format("woff2");
-}
-
-@font-face
-{
-    font-family: Oxanium;
-    font-style: normal;
-    font-weight: 400;
-    src: url(../public/fonts/Oxanium.woff2) format('woff2');
-}
-
-@font-face
-{
-    font-family: Cyberpunk;
-    src: url(../public/fonts/Cyberpunk.otf) format('opentype');
-}
-/*#endregion*/
-
 /*#region top level elements*/
 :root
 {
@@ -155,6 +131,7 @@ body
 /*#endregion*/
 
 /*#region colors*/
+
 .fg-yellow { --fg: var(--yellow); color: var(--yellow) !important; }
 .bg-yellow { --bg: var(--yellow); background-color: var(--yellow); }
 .ac-yellow { --ac: var(--yellow); }
@@ -177,9 +154,11 @@ body
 
 .fg-purple { --fg: var(--purple); color: var(--purple) !important; }
 .bg-purple { --bg: var(--purple); background-color: var(--purple); }
+.bg-light { --bg: var(--purple) !important;; background-color: var(--purple) !important; }
 .ac-purple { --ac: var(--purple); }
 
 .fg-black { --fg: var(--black); color: var(--black) !important; }
+.fg-light { --fg: var(--black); color: var(--black) !important; }
 .bg-black { --bg: var(--black); background-color: var(--black); }
 .ac-black { --ac: var(--black); }
 
@@ -188,9 +167,19 @@ body
 .ac-white { --ac: var(--white); }
 
 .fg-dark { --fg: var(--dark); color: var(--dark) !important; }
-.bg-dark { --bg: var(--dark); background-color: var(--dark); }
 .ac-dark { --ac: var(--dark); }
-/*#endregion*/
+
+.custom-bg-light { --bg: var(--yellow) !important;; background-color: var(--yellow) !important; }
+.custom-bg-accent-light { --bg: var(--purple) !important;; background-color: var(--purple) !important; }
+.custom-fg-light { --fg: var(--purple); color: var(--purple) !important; }
+.custom-fg-dark { --fg: var(--yellow); color: var(--yellow) !important; }
+.custom-link-light a{ --fg: var(--purple); color: var(--purple) !important; }
+.custom-link-dark a{ --fg: var(--yellow); color: var(--yellow) !important; }
+.custom-bg-dark { --bg: var(--dark) !important; background-color: var(--dark) !important; }
+.custom-bg-accent-dark { --bg: var(--black) !important; background-color: var(--black) !important; }
+.custom-ac-light { --ac: var(--purple);}
+.custom-ac-dark { --ac: var(--yellow);}
+    /*#endregion*/
 
 /*#region razor*/
 .cyber-razor-top
@@ -325,11 +314,15 @@ body
 }
 
 .cyber-button:before,
-.cyber-button-small:before,
+.cyber-button-small:before,.cyber-button-small,
 .cyber-button-big:before
 {
     background: var(--button-shadow-primary);
     transform: translate(var(--button-border), 0);
+}
+.cyber-button-small:disabled {
+    cursor: auto;
+    opacity: 0.6;
 }
 
 .cyber-button:after,
@@ -607,6 +600,7 @@ body
     clip-path: var(--og-clip-path);
     padding: var(--tile-padding);
     padding-bottom: var(--tile-edges);
+    position: relative;
 }
 
 .cyber-tile img,
@@ -833,7 +827,7 @@ h6.cyber-h
     --banner-gradient-stop: 220px;
 }
 
-.cyber-banner.bg-yellow,
+.cyber-banner.bg-yellow,.cyber-banner.bg-light,
 .cyber-banner-short.bg-yellow
 {
     --banner-color1: var(--cyan);

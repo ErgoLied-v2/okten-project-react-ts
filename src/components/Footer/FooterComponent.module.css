@@ -3,4 +3,6 @@ footer{
     margin-top: 400px;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    bottom: 0;
 }

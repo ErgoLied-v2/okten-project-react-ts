@@ -13,7 +13,7 @@ const GenresListComponent = () => {
     }, []);
 
     return (
-        <div >
+        <div className={'list-container'}>
             <ul className={'two-column-list'}>
                 {genres.map(genre => <GenreItemComponent key={genre.id} genre={genre}/>)}
             </ul>

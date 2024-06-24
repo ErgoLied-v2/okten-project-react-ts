@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {useAppSelector} from "../../redux/store";
 import {BadgeFixed} from "../BootstrapFixed/BootstrapFixedComponents";
+import './GenreBadgeComponent.css';
 
 interface IProps {
     genreID: number;
@@ -12,9 +13,9 @@ const GenreBadgeComponent: FC<IProps> = ({genreID}) => {
     const genre = genres.find(genre => genre.id === genreID);
 
     return (
-        <BadgeFixed bg="secondary">
-            {genre && genre.name}
-        </BadgeFixed>
+            <BadgeFixed bg="info">
+                {genre && genre.name}
+            </BadgeFixed>
     );
 };
 

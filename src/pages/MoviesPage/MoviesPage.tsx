@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {useEffect} from "react";
 import {moviesActions} from "../../redux/slices/moviesSlice";
 import {genresActions} from "../../redux/slices/genresSlice";
-import LoadingComponent from "../../components/Loading/LoadingComponent";
+import styles from './MoviesPage.module.css';
 
 const MoviesPage = () => {
     const [query] = useSearchParams();
@@ -29,10 +29,10 @@ const MoviesPage = () => {
     }, [query]);
 
     return (
-        <>
+        <div className={styles.moviesContainer}>
             <PaginationComponent/>
             <MoviesListComponent/>
-        </>
+        </div>
     );
 };
 

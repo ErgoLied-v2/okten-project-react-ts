@@ -1,3 +1,9 @@
+.list-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
 .two-column-list{
     width: 50vw;
 }
@@ -6,11 +12,9 @@
     column-count: 3;
     column-gap: 20px;
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .two-column-list li {
     break-inside: avoid;
-    padding: 2px 0;
+    padding: 5px 0;
 }

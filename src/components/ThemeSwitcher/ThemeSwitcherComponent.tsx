@@ -10,7 +10,11 @@ const ThemeSwitcherComponent = () => {
 
     return (
         <div>
-            <button onClick={changeThemeMod}>mod: {mod}</button>
+            <button onClick={changeThemeMod} className={`cyber-button-small bg-yellow fg-dark`}>
+                mod: {mod}
+                <span className="glitchtext">Change</span>
+                <span className="tag">R25</span>
+            </button>
         </div>
     );
 };
