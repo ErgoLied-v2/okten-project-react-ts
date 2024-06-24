@@ -7,11 +7,13 @@ const urls = {
 
     movies: {
         base: '/discover/movie',
-        search: '/search/movie'
+        search: '/search/movie',
+        ratedList: '/account/11025706/rated/movies'
     },
 
     movie: {
         base: (id: string) => '/movie/' + id,
+        details: (id: string) => urls.movie.base(id) + '?append_to_response=videos',
         rating: (id: string) => urls.movie.base(id) + '/rating',
         states: (id: string) => urls.movie.base(id) + '/account_states'
     },

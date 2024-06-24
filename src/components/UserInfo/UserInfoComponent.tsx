@@ -1,9 +1,11 @@
+import {Link} from "react-router-dom";
+
 const UserInfoComponent = () => {
 
     return (
-        <div>
+        <Link to={'/userRatedMovies'}>
             <p>Hi, User</p>
-        </div>
+        </Link>
     );
 };
 

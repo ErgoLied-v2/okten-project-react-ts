@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import PosterPreviewComponent from "../PosterPreview/PosterPreviewComponent";
 import GenreBadgeComponent from "../GenreBadge/GenreBadgeComponent";
 import StarsRatingComponent from "../StarsRating/StarsRatingComponent";
@@ -9,7 +9,18 @@ interface IProps {
 }
 
 const MovieInfoComponent: FC<IProps> = ({movie}) => {
-    return (
+    const [videoKey, setVideoKey] = useState<string | null>(null);
+
+    useEffect(() => {
+        const video = movie.videos.results.find(video => (video.site === 'YouTube' && video.type === 'Trailer'));
+        if (video) {
+            setVideoKey(video.key);
+        } else {
+            setVideoKey(null);
+        }
+    }, [movie]);
+
+      return (
         <div>
             <p>{movie.title}</p>
             {movie.genres.map(genre => <GenreBadgeComponent key={genre.id} genreID={genre.id}/>)}
@@ -23,6 +34,11 @@ const MovieInfoComponent: FC<IProps> = ({movie}) => {
             <StarsRatingComponent initialValue={movie.vote_average} movieID={movie.id}/>
 
             <PosterPreviewComponent path={movie.poster_path} title={movie.title}/>
+
+            {videoKey && <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoKey}`}
+                     title="YouTube video player"
+                     allowFullScreen></iframe>}
+
             <h2>overview</h2>
             <p>{movie.overview}</p>
         </div>

@@ -15,8 +15,15 @@ export const moviesService = {
 
     getByID: async (movieID: string): Promise<IMovieByID> => {
         const response = await axiosInstance.get<IMovieByID>(
-            urls.movie.base(movieID));
+            urls.movie.details(movieID));
         return response.data;
+    },
+
+    getRatedList: async ():Promise<IMoviesPaginated>=>{
+        const response = await axiosInstance.get<IMoviesPaginated>(
+            urls.movies.ratedList
+        );
+        return response.data
     },
 
     search: async (query: string, page: string): Promise<IMoviesPaginated> => {

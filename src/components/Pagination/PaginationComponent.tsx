@@ -35,7 +35,7 @@ const PaginationComponent = () => {
 
     const onPageClick = (page: number) => {
         const url = `?page=${page}${searchQuery ? `&query=${searchQuery}` : ''}`;
-        navigate(url, { replace: true });
+        navigate(url, {replace: true});
     };
 
     const onFirstPageClick = () => onPageClick(1);
@@ -57,13 +57,13 @@ const PaginationComponent = () => {
         }
     } else {
         pages.push(
-            <PaginationItemFixed key={1}
-                                 active={1 === currentPage}
-                                 onClick={() => onPageClick(1)}>1</PaginationItemFixed>
+            <button key={1}
+                    disabled={1 === currentPage}
+                    onClick={() => onPageClick(1)}>1</button>
         );
 
         if (currentPage > 4) {
-            pages.push(<PaginationEllipsisFixed key="start ..." disabled/>);
+            pages.push(<button key="start ..." disabled>...</button>);
         }
 
         let start = currentPage > 4 ? currentPage - 2 : 2;
@@ -77,11 +77,11 @@ const PaginationComponent = () => {
 
         for (let i = start; i <= end; i++) {
             pages.push(
-                <PaginationItemFixed key={i}
-                                     active={i === currentPage}
-                                     onClick={() => onPageClick(i)}>
+                <button key={i}
+                        disabled={i === currentPage}
+                        onClick={() => onPageClick(i)}>
                     {i}
-                </PaginationItemFixed>
+                </button>
             );
         }
     }
@@ -90,17 +90,17 @@ const PaginationComponent = () => {
     return (
         <div>
             <PaginationFixed>
-                <PaginationFirstFixed onClick={onFirstPageClick}
-                                      disabled={currentPage === 1}/>
-                <PaginationPrevFixed onClick={onPrevPageClick}
-                                     disabled={currentPage === 1}/>
+                <button onClick={onFirstPageClick}
+                        disabled={currentPage === 1}/>
+                <button onClick={onPrevPageClick}
+                        disabled={currentPage === 1}/>
 
                 {pages}
 
-                <PaginationNextFixed onClick={onNextPageClick}
-                                     disabled={currentPage === totalPages}/>
-                <PaginationLastFixed onClick={onLastPageClick}
-                                     disabled={currentPage === totalPages}/>
+                <button onClick={onNextPageClick}
+                        disabled={currentPage === totalPages}/>
+                <button onClick={onLastPageClick}
+                        disabled={currentPage === totalPages}/>
             </PaginationFixed>
         </div>
     );

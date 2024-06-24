@@ -5,6 +5,7 @@ import MoviePage from "../pages/MoviePage/MoviePage";
 import GenresListComponent from "../components/GenresList/GenresListComponent";
 import MoviesByGenrePage from "../pages/MoviesByGenrePage/MoviesByGenrePage";
 import MovieByGenrePage from "../pages/MovieByGenrePage/MovieByGenrePage";
+import RatedMoviesPage from "../pages/RatedMoviesPage/RatedMoviesPage";
 
 const routes: RouteObject[] = [{
     path: '', element: <App/>, children: [
@@ -12,10 +13,8 @@ const routes: RouteObject[] = [{
         {path: '/:movieID', element: <MoviePage/>},
         {path: '/genres', element: <GenresListComponent/>},
         {path: '/genres/:genreID', element: <MoviesByGenrePage/>},
-        {path: '/genres/:genreID/:movieID', element: <MovieByGenrePage/>}
-
-        // * 'guest/ratedMovies'
-
+        {path: '/genres/:genreID/:movieID', element: <MovieByGenrePage/>},
+        {path: '/userRatedMovies', element:<RatedMoviesPage/>}
     ]
 }];
 

@@ -13,4 +13,11 @@ export interface IMovieByID {
     title: string;
     vote_average: number;
     vote_count: number;
+    videos: {
+        results: {
+            key: string;
+            site: string;
+            type: string;
+        }[]
+    }
 }
