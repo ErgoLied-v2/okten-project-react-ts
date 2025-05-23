@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/okten-project-react-ts/static/css/main.ccf1929a.css",
+    "main.js": "/okten-project-react-ts/static/js/main.ff8a4408.js",
+    "static/js/453.5a144b70.chunk.js": "/okten-project-react-ts/static/js/453.5a144b70.chunk.js",
+    "index.html": "/okten-project-react-ts/index.html",
+    "main.ccf1929a.css.map": "/okten-project-react-ts/static/css/main.ccf1929a.css.map",
+    "main.ff8a4408.js.map": "/okten-project-react-ts/static/js/main.ff8a4408.js.map",
+    "453.5a144b70.chunk.js.map": "/okten-project-react-ts/static/js/453.5a144b70.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ccf1929a.css",
+    "static/js/main.ff8a4408.js"
+  ]
+}
