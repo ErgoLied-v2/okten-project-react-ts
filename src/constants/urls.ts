@@ -14,8 +14,8 @@ const urls = {
     movie: {
         base: (id: string) => baseURL + '/movie/' + id,
         details: (id: string) => baseURL + '/movie/' + id + '?append_to_response=videos',
-        rating: (id: string) => urls.movie.base(id) + '/rating',
-        states: (id: string) => urls.movie.base(id) + '/account_states'
+        rating: (id: string) => baseURL + '/movie/' + id + '/rating',
+        states: (id: string) => baseURL + '/movie/' + id + '/account_states'
     },
 
     genres: {
